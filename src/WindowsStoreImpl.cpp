@@ -57,8 +57,8 @@ WindowsStoreImpl::GetStoreProducts(Napi::Array productKinds) {
     HRESULT hr = initWindow->Initialize(m_hwnd);
   }
 
-
-  Windows::Foundation::Collections::IVector<hstring> wProductKinds{winrt::single_threaded_vector<hstring>()}, wStoreIds{winrt::single_threaded_vector<hstring>()};
+  Windows::Foundation::Collections::IVector<hstring> wProductKinds{winrt::single_threaded_vector<hstring>()},
+      wStoreIds{winrt::single_threaded_vector<hstring>()};
   wProductKinds.Append(winrt::to_hstring("Application"));
   wProductKinds.Append(winrt::to_hstring("Consumable"));
   wProductKinds.Append(winrt::to_hstring("Durable"));

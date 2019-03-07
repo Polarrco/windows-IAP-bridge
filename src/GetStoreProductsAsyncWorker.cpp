@@ -4,8 +4,8 @@
 #include <napi.h>
 #include <string>
 
-GetStoreProductsAsyncWorker::GetStoreProductsAsyncWorker(const Napi::Function &callback, 
-                                                         Napi::Array &productKinds, WindowsStoreImpl *pImpl)
+GetStoreProductsAsyncWorker::GetStoreProductsAsyncWorker(const Napi::Function &callback, Napi::Array &productKinds,
+                                                         WindowsStoreImpl *pImpl)
     : Napi::AsyncWorker(callback), m_productKinds(productKinds), m_pImpl(pImpl), m_result(NULL) {
   std::cout << "GetStoreProductsAsyncWorker::GetStoreProductsAsyncWorker" << std::endl;
 }

@@ -6,8 +6,7 @@
 
 class GetStoreProductsAsyncWorker : public Napi::AsyncWorker {
 public:
-  GetStoreProductsAsyncWorker(const Napi::Function &callback, Napi::Array &productKinds,
-                              WindowsStoreImpl *pImpl);
+  GetStoreProductsAsyncWorker(const Napi::Function &callback, Napi::Array &productKinds, WindowsStoreImpl *pImpl);
 
 protected:
   virtual void Execute() override;
