@@ -1,0 +1,22 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "WindowsStore Launch",
+      "preLaunchTask": "npm: build:dev",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "C:\\Program Files\\nodejs\\node",
+      "args": [
+        "C:\\Users\\Tauseef\\work\\polarr_photo_editor_desktop\\electron_app\\windowsstore\\index.js"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": true
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "windowsstore",
+  "version": "1.0.1",
+  "description": "",
+  "gypfile": true,
+  "scripts": {
+    "rebuild": "node-gyp rebuild --target=3.0.7 --runtime=electron --arch=x64 --release --dist-url=https://atom.io/download/atom-shell --abi=64",
+    "build": "node-gyp build --target=3.0.7 --runtime=electron --arch=x64 --release --dist-url=https://atom.io/download/atom-shell --abi=64",
+    "build:dev": "node-gyp build --debug",
+    "clean": "node-gyp clean"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^3.0.7",
+    "electron-rebuild": "^1.8.2",
+    "node-gyp": "^3.8.0"
+  },
+  "dependencies": {
+    "node-addon-api": "^1.5.0"
+  }
+}
