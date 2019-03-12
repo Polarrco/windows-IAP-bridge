@@ -8,7 +8,8 @@
     "build": "node-gyp build --target=3.0.7 --runtime=electron --arch=x64 --release --dist-url=https://atom.io/download/atom-shell --abi=64",
     "build:dev": "node-gyp build --debug",
     "clean": "node-gyp clean",
-    "preinstall": "node-gyp configure"
+    "preinstall": "node-gyp configure",
+    "install": "node-gyp rebuild"
   },
   "author": "",
   "license": "ISC",
