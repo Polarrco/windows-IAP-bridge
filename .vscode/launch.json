@@ -9,9 +9,9 @@
       "preLaunchTask": "npm: build:dev",
       "type": "cppvsdbg",
       "request": "launch",
-      "program": "C:\\Program Files\\nodejs\\node",
+      "program": "C:\\Program Files\\nodejs\\node.exe",
       "args": [
-        "C:\\Users\\Tauseef\\work\\polarr_photo_editor_desktop\\electron_app\\windowsstore\\index.js"
+        "C:\\Users\\Tauseef\\work\\windowsstore\\index-debug.js"
       ],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
