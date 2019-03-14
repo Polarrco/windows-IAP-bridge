@@ -80,7 +80,6 @@ void WindowsStore::GetAssociatedStoreProductsAsync(const Napi::CallbackInfo &inf
   Napi::HandleScope scope(env);
   Napi::Array productKinds = info[0].As<Napi::Array>();
   Napi::Function cb = info[1].As<Napi::Function>();
-  std::cout << "WindowsStore::GetAssociatedStoreProductsAsync" << std::endl;
   (new GetStoreProductsAsyncWorker(cb, productKinds, GetInternalInstance()))->Queue();
 }
 

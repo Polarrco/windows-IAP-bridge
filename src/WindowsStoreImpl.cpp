@@ -49,7 +49,6 @@ int WindowsStoreImpl::GetStoreApp(std::string id) {
 Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::Collections::IKeyValuePair<
     winrt::hstring, winrt::Windows::Services::Store::StoreProduct>>
 WindowsStoreImpl::GetStoreProducts(Napi::Array productKinds) {
-  std::cout << "WindowsStoreImpl::GetStoreProducts start" << std::endl;
 
   StoreContext context = StoreContext::GetDefault();
   auto initWindow = context.try_as<IInitializeWithWindow>();
@@ -66,12 +65,10 @@ WindowsStoreImpl::GetStoreProducts(Napi::Array productKinds) {
 
   auto res = context.GetAssociatedStoreProductsAsync(wProductKinds).get();
   auto associatedProd = res.Products();
-  std::cout << "WindowsStoreImpl::GetStoreProducts end" << std::endl;
   return associatedProd.First();
 }
 
 winrt::Windows::Services::Store::StoreAppLicense WindowsStoreImpl::GetStoreAppLicense() {
-  std::cout << "WindowsStoreImpl::GetStoreAppLicense start" << std::endl;
   StoreContext context = StoreContext::GetDefault();
   auto initWindow = context.try_as<IInitializeWithWindow>();
   if (initWindow != nullptr) {
@@ -148,7 +145,7 @@ std::string WindowsStoreImpl::GetCustomerPurchaseId(std::string token, std::stri
 
   auto result = context.GetCustomerPurchaseIdAsync(w_token, w_id).get();
   if (result.empty()) {
-    return "empty";
+    return "";
   } else {
     return winrt::to_string(result);
   }
@@ -165,9 +162,7 @@ Windows::Foundation::IAsyncAction WindowsStoreImpl::GetCustomerPurchaseIdAsync(s
     HRESULT hr = initWindow->Initialize(m_hwnd);
   }
 
-  co_await 3s;
   hstring result = co_await context.GetCustomerPurchaseIdAsync(w_token, w_id); // ignore the co_await error squiggly
-  std::cout << "CustomerPurchaseId: " << to_string(result) << std::endl;
   co_return;
 }
 

@@ -5,17 +5,11 @@
 #include <string>
 
 GetAppLicenseAsyncWorker::GetAppLicenseAsyncWorker(const Napi::Function &callback, WindowsStoreImpl *pImpl)
-    : Napi::AsyncWorker(callback), m_pImpl(pImpl), m_result(NULL) {
-  std::cout << "GetAppLicenseAsyncWorker::GetAppLicenseAsyncWorker" << std::endl;
-}
+    : Napi::AsyncWorker(callback), m_pImpl(pImpl), m_result(NULL) {}
 
-void GetAppLicenseAsyncWorker::Execute() {
-  std::cout << "GetAppLicenseAsyncWorker::Execute" << std::endl;
-  m_result = m_pImpl->GetStoreAppLicense();
-}
+void GetAppLicenseAsyncWorker::Execute() { m_result = m_pImpl->GetStoreAppLicense(); }
 
 void GetAppLicenseAsyncWorker::OnOK() {
-  std::cout << "GetAppLicenseAsyncWorker::OnOK" << std::endl;
   Napi::Env env = Env();
   Napi::Object obj = Napi::Object::New(env);
   Napi::Object addOnLicensesObj = Napi::Object::New(env);
