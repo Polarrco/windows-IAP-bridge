@@ -13,11 +13,11 @@
             "src/GetAppLicenseAsyncWorker.cpp"
         ],
         'include_dirs': [
-            '<!@(node -p "require(\'node-addon-api\').include")'
+            '<!@(node -p "require(\'../node-addon-api\').include")'
         ],
         'libraries': ['-lruntimeobject.lib'],
         'dependencies': [
-            '<!(node -p "require(\'node-addon-api\').gyp")'
+            '<!(node -p "require(\'../node-addon-api\').gyp")'
         ],
         'libraries': ['-lruntimeobject.lib'],
         'defines': [ 'NAPI_DISABLE_CPP_EXCEPTIONS' ],
