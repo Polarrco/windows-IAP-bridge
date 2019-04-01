@@ -9,15 +9,24 @@
 - node-gyp
 
 ## Installation
+- clone repo into your project
+- cd `path/to/project/<cloned-folder>`
 - `npm install`
-- `node-gyp configure`
-- `npm run build`
 
+## To build for an Electron app
+- `npm run build:electron`
+
+## Usage
+```
+const polarr_windows_store = require('polarr_windows_store')
+const store = new polarr_windows_store.WindowsStore()
+store.getAssociatedStoreProductsAsync(['Durable'], callback)
+```
 ## Debugging
 #### The project is already configured for debugging using VS Code (tested on 1.31.1)
 - `npm run build:dev`
 - set breakpoints in the C++ or JS code
-- Press play on the debug tab, choose `windowsstore` from the dropdown
+- Press play on the debug tab, choose `polarr_windows_store` from the dropdown
 
 #### Initial code examples referred while development
 [https://medium.com/@atulanand94/beginners-guide-to-writing-nodejs-addons-using-c-and-n-api-node-addon-api-9b3b718a9a7f](https://medium.com/@atulanand94/beginners-guide-to-writing-nodejs-addons-using-c-and-n-api-node-addon-api-9b3b718a9a7f)
