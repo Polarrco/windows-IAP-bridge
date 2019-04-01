@@ -10,7 +10,7 @@
 
 ## Installation
 - clone repo into your project
-- cd `path/to/project/<cloned-folder>`
+- `cd path/to/project/<cloned-folder>`
 - `npm install`
 
 ## To build for an Electron app
