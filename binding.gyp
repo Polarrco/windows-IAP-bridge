@@ -5,7 +5,7 @@
         "cflags_cc!": [ "-fno-exceptions" ],
         "sources": [
             "src/main.cpp",
-            "src/WindowsStore.cpp",
+            "src/StoreContext.cpp",
             "src/WindowsStoreImpl.cpp",
             "src/RequestPurchaseAsyncWorker.cpp",
             "src/GetStoreProductsAsyncWorker.cpp",

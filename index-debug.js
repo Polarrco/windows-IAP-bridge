@@ -1,10 +1,10 @@
 'use strict'
 
 const windowsStore = require('./lib/main');
-const store = new windowsStore.WindowsStore()
+const store = new windowsStore.StoreContext()
 
 function getAssociatedStoreProducts() {
-    store.getAssociatedStoreProductsAsync([1, 2, 3], console.log.bind(this))
+    store.getAssociatedStoreProductsAsync(['Durable'], console.log.bind(this))
 }
 
 function getAppLocalStorageFolder() {

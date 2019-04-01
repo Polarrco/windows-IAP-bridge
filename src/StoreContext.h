@@ -3,10 +3,10 @@
 #include <napi.h>
 #include "WindowsStoreImpl.h"
 
-class WindowsStore : public Napi::ObjectWrap<WindowsStore> {
+class StoreContext : public Napi::ObjectWrap<StoreContext> {
 public:
   static Napi::Object Init(Napi::Env env, Napi::Object exports);
-  WindowsStore(const Napi::CallbackInfo &info);
+  StoreContext(const Napi::CallbackInfo &info);
   WindowsStoreImpl *GetInternalInstance();
 
 private:

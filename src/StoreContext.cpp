@@ -1,4 +1,4 @@
-#include "WindowsStore.h"
+#include "StoreContext.h"
 #include "GetCustomerPurchaseIdAsyncWorker.h"
 #include "GetStoreProductsAsyncWorker.h"
 #include "RequestPurchaseAsyncWorker.h"
@@ -7,39 +7,38 @@
 #include <iostream>
 #include <string>
 
-Napi::FunctionReference WindowsStore::constructor;
+Napi::FunctionReference StoreContext::constructor;
 
-WindowsStoreImpl *WindowsStore::GetInternalInstance() { return this->m_impl; }
+WindowsStoreImpl *StoreContext::GetInternalInstance() { return this->m_impl; }
 
-Napi::Object WindowsStore::Init(Napi::Env env, Napi::Object exports) {
+Napi::Object StoreContext::Init(Napi::Env env, Napi::Object exports) {
   Napi::HandleScope scope(env);
 
   Napi::Function func =
-      DefineClass(env, "WindowsStore",
+      DefineClass(env, "StoreContext",
                   {
-                      InstanceMethod("initialize", &WindowsStore::Initialize),
-                      InstanceMethod("getAppLocalStorageFolder", &WindowsStore::GetAppLocalStorageFolder),
-                      InstanceMethod("getAssociatedStoreProductsAsync", &WindowsStore::GetAssociatedStoreProductsAsync),
-                      InstanceMethod("getCustomerPurchaseIdAsync", &WindowsStore::GetCustomerPurchaseIdAsync),
-                      InstanceMethod("requestPurchaseAsync", &WindowsStore::RequestPurchaseAsync),
-                      InstanceMethod("getAppLicenseAsync", &WindowsStore::GetAppLicenseAsync),
+                      InstanceMethod("initialize", &StoreContext::Initialize),
+                      InstanceMethod("getAppLocalStorageFolder", &StoreContext::GetAppLocalStorageFolder),
+                      InstanceMethod("getAssociatedStoreProductsAsync", &StoreContext::GetAssociatedStoreProductsAsync),
+                      InstanceMethod("getCustomerPurchaseIdAsync", &StoreContext::GetCustomerPurchaseIdAsync),
+                      InstanceMethod("requestPurchaseAsync", &StoreContext::RequestPurchaseAsync),
+                      InstanceMethod("getAppLicenseAsync", &StoreContext::GetAppLicenseAsync),
                   });
 
   constructor = Napi::Persistent(func);
   constructor.SuppressDestruct();
 
-  exports.Set("WindowsStore", func);
+  exports.Set("StoreContext", func);
   return exports;
 }
 
-WindowsStore::WindowsStore(const Napi::CallbackInfo &info) : Napi::ObjectWrap<WindowsStore>(info) {
+StoreContext::StoreContext(const Napi::CallbackInfo &info) : Napi::ObjectWrap<StoreContext>(info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
-  // inheritance
   if (info.Length() == 1 && info[0].IsObject()) {
     Napi::Object object_parent = info[0].As<Napi::Object>();
-    WindowsStore *example_parent = Napi::ObjectWrap<WindowsStore>::Unwrap(object_parent);
+    StoreContext *example_parent = Napi::ObjectWrap<StoreContext>::Unwrap(object_parent);
     WindowsStoreImpl *parent_actual_class_instance = example_parent->GetInternalInstance();
     this->m_impl = new WindowsStoreImpl();
     return;
@@ -48,7 +47,7 @@ WindowsStore::WindowsStore(const Napi::CallbackInfo &info) : Napi::ObjectWrap<Wi
   this->m_impl = new WindowsStoreImpl();
 }
 
-Napi::Value WindowsStore::Initialize(const Napi::CallbackInfo &info) {
+Napi::Value StoreContext::Initialize(const Napi::CallbackInfo &info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
   Napi::Buffer<char *> bufferData = info[0].As<Napi::Buffer<char *>>();
@@ -58,7 +57,7 @@ Napi::Value WindowsStore::Initialize(const Napi::CallbackInfo &info) {
   return Napi::Boolean::New(info.Env(), result);
 }
 
-void WindowsStore::GetCustomerPurchaseIdAsync(const Napi::CallbackInfo &info) {
+void StoreContext::GetCustomerPurchaseIdAsync(const Napi::CallbackInfo &info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
@@ -68,14 +67,14 @@ void WindowsStore::GetCustomerPurchaseIdAsync(const Napi::CallbackInfo &info) {
   (new GetCustomerPurchaseIdAsyncWorker(cb, token, type, GetInternalInstance()))->Queue();
 }
 
-Napi::Value WindowsStore::GetAppLocalStorageFolder(const Napi::CallbackInfo &info) {
+Napi::Value StoreContext::GetAppLocalStorageFolder(const Napi::CallbackInfo &info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
   std::string path = WindowsStoreImpl::GetAppLocalStorageFolder();
   return Napi::String::New(info.Env(), path);
 }
 
-void WindowsStore::GetAssociatedStoreProductsAsync(const Napi::CallbackInfo &info) {
+void StoreContext::GetAssociatedStoreProductsAsync(const Napi::CallbackInfo &info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
   Napi::Array productKinds = info[0].As<Napi::Array>();
@@ -83,7 +82,7 @@ void WindowsStore::GetAssociatedStoreProductsAsync(const Napi::CallbackInfo &inf
   (new GetStoreProductsAsyncWorker(cb, productKinds, GetInternalInstance()))->Queue();
 }
 
-void WindowsStore::RequestPurchaseAsync(const Napi::CallbackInfo &info) {
+void StoreContext::RequestPurchaseAsync(const Napi::CallbackInfo &info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
   if (info.Length() < 3) {
@@ -97,7 +96,7 @@ void WindowsStore::RequestPurchaseAsync(const Napi::CallbackInfo &info) {
   (new RequestPurchaseAsyncWorker(cb, storeId, storePurchaseProperties, GetInternalInstance()))->Queue();
 }
 
-void WindowsStore::GetAppLicenseAsync(const Napi::CallbackInfo &info) {
+void StoreContext::GetAppLicenseAsync(const Napi::CallbackInfo &info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
   Napi::Function cb = info[0].As<Napi::Function>();
