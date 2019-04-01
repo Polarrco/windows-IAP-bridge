@@ -1,18 +1,20 @@
 {
   "name": "windowsstore",
-  "version": "1.0.1",
-  "gypfile": false,
+  "main": "lib/main.js",
+  "version": "0.0.1",
+  "gypfile": true,
   "description": "N-API wrapper around some APIs on winrt::Windows::Services::Store namespace",
   "scripts": {
-    "rebuild": "node-gyp rebuild --target=3.0.7 --runtime=electron --arch=x64 --release --dist-url=https://atom.io/download/atom-shell --abi=64",
-    "build": "node-gyp build --target=3.0.7 --runtime=electron --arch=x64 --release --dist-url=https://atom.io/download/atom-shell --abi=64",
+    "build": "node-gyp build",
     "build:dev": "node-gyp build --debug",
-    "clean": "node-gyp clean",
-    "postinstall": "node-gyp configure"
+    "build:electron": "node-gyp build --target=3.0.7 --runtime=electron --arch=x64 --release --dist-url=https://atom.io/download/atom-shell --abi=64",
+    "rebuild": "node-gyp rebuild",
+    "clean": "node-gyp clean"
   },
-  "author": "",
+  "author": "tauseefk",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^11.11.3",
     "electron": "^3.0.7",
     "electron-rebuild": "^1.8.2"
   },

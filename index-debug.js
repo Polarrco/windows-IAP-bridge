@@ -1,4 +1,6 @@
-const windowsStore = require('./build/Debug/WindowsStore.node');
+'use strict'
+
+const windowsStore = require('./lib/main');
 const store = new windowsStore.WindowsStore()
 
 function getAssociatedStoreProducts() {
