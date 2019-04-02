@@ -1,6 +1,6 @@
 'use strict'
 
-const windowsStore = require('./lib/main');
+const windowsStore = require('./lib/main')
 const store = new windowsStore.StoreContext()
 
 function getAssociatedStoreProducts() {
