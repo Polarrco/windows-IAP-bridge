@@ -51,6 +51,8 @@ declare module "polarr_windows_store" {
         user: Object;
         constructor();
 
+        initialize(hwnd: Uint8Array): boolean;
+
         static getDefault(): StoreContext;
 
         getCustomerPurchaseIdAsync(serviceTicket: String, publisherUserId: String, callback: (error: Error, result: String) => void): void;
