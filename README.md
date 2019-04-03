@@ -19,7 +19,7 @@
 ## Usage
 ```
 const polarr_windows_store = require('polarr_windows_store')
-const store = new polarr_windows_store.WindowsStore()
+const store = new polarr_windows_store.StoreContext()
 store.getAssociatedStoreProductsAsync(['Durable'], callback)
 ```
 ## Debugging
