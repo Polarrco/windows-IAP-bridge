@@ -1,5 +1,4 @@
 #include "WindowsStoreImpl.h"
-
 #include <unknwn.h>
 #include "winrt/Windows.Data.Json.h"
 #include "winrt/Windows.Storage.h"
@@ -58,8 +57,8 @@ WindowsStoreImpl::GetStoreProducts(Napi::Array productKinds) {
   Windows::Foundation::Collections::IVector<hstring> wProductKinds{winrt::single_threaded_vector<hstring>()},
       wStoreIds{winrt::single_threaded_vector<hstring>()};
 
-  for (int productKind = 0; productKind < productKinds.Length; productKind++) {
-    std::string pKind = productKinds.Get(productKind).As<std::string>();
+  for (int productKind = 0; productKind < productKinds.Length(); productKind++) {
+    std::string pKind = productKinds.Get(productKind).As<Napi::String>();
     wProductKinds.Append(winrt::to_hstring(pKind));
   }
 
