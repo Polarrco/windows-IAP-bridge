@@ -22,6 +22,10 @@ const polarr_windows_store = require('polarr_windows_store')
 const store = new polarr_windows_store.StoreContext()
 store.getAssociatedStoreProductsAsync(['Durable'], callback)
 ```
+
+## Packaging
+To package your application please use https://github.com/felixrieseberg/electron-windows-store, it lets you associate your application to the store product.
+
 ## Debugging
 #### The project is already configured for debugging using VS Code (tested on 1.31.1)
 - `npm run build:dev`
