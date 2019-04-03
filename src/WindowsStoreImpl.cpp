@@ -55,13 +55,13 @@ WindowsStoreImpl::GetStoreProducts(Napi::Array productKinds) {
   if (initWindow != nullptr) {
     HRESULT hr = initWindow->Initialize(m_hwnd);
   }
-
   Windows::Foundation::Collections::IVector<hstring> wProductKinds{winrt::single_threaded_vector<hstring>()},
       wStoreIds{winrt::single_threaded_vector<hstring>()};
-  wProductKinds.Append(winrt::to_hstring("Application"));
-  wProductKinds.Append(winrt::to_hstring("Consumable"));
-  wProductKinds.Append(winrt::to_hstring("Durable"));
-  wProductKinds.Append(winrt::to_hstring("UnmanagedConsumable"));
+
+  for (int productKind = 0; productKind < productKinds.Length; productKind++) {
+    std::string pKind = productKinds.Get(productKind).As<std::string>();
+    wProductKinds.Append(winrt::to_hstring(pKind));
+  }
 
   auto res = context.GetAssociatedStoreProductsAsync(wProductKinds).get();
   auto associatedProd = res.Products();
