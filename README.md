@@ -1,7 +1,7 @@
 # Polarr Windows Store
 ### N-API wrapper around some APIs on winrt::Windows::Services::Store namespace
 
-## Requirements
+## Requirements (Minimum)
 - Windows 10
 - VisualStudio 2017
 - Windows SDK (10.17763.0)
