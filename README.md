@@ -1,4 +1,4 @@
-# WindowsStore
+# Polarr Windows Store
 ### N-API wrapper around some APIs on winrt::Windows::Services::Store namespace
 
 ## Requirements
