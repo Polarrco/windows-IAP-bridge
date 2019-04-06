@@ -18,8 +18,15 @@
 
 ## Usage
 ```
-const polarr_windows_store = require('polarr_windows_store')
-const store = new polarr_windows_store.StoreContext()
+const electron = require('electron')
+const remote = electron.remote
+.
+.
+.
+const windowsIAP = require('windows-IAP-bridge')
+const StoreContext = new windowsIAP.StoreContext()
+let hwnd = remote.getCurrentWindow().getNativeWindowHandle()
+const storeContextResult = StoreContext.initialize(hwnd)
 store.getAssociatedStoreProductsAsync(['Durable'], callback)
 ```
 
