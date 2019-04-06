@@ -1,5 +1,5 @@
 {
-  "name": "windowsstore",
+  "name": "windows-iap-bridge",
   "main": "lib/main.js",
   "version": "0.0.1",
   "gypfile": true,
