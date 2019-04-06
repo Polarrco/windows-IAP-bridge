@@ -37,7 +37,7 @@ To package your application please use https://github.com/felixrieseberg/electro
 #### The project is already configured for debugging using VS Code (tested on 1.31.1)
 - `npm run build:dev`
 - set breakpoints in the C++ or JS code
-- Press play on the debug tab, choose `polarr_windows_store` from the dropdown
+- Press play on the debug tab, choose `windows-IAP-bridge` from the dropdown
 
 #### Initial code examples referred while development
 [https://medium.com/@atulanand94/beginners-guide-to-writing-nodejs-addons-using-c-and-n-api-node-addon-api-9b3b718a9a7f](https://medium.com/@atulanand94/beginners-guide-to-writing-nodejs-addons-using-c-and-n-api-node-addon-api-9b3b718a9a7f)
