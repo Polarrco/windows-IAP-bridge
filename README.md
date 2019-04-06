@@ -1,4 +1,4 @@
-# Polarr Windows Store
+# Windows In-App Purchase Bridge
 ### N-API wrapper around some APIs on winrt::Windows::Services::Store namespace
 
 ## Requirements (Minimum)
