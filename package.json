@@ -14,7 +14,6 @@
   "author": "tauseefk",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^11.11.3",
     "electron": "^3.0.7",
     "electron-rebuild": "^1.8.2"
   },
