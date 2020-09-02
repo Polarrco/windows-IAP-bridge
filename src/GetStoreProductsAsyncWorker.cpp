@@ -24,6 +24,8 @@ void GetStoreProductsAsyncWorker::OnOK() {
 
     auto price = current.Value().Price();
     storePrice.Set("formattedRecurrencePrice", winrt::to_string(price.FormattedRecurrencePrice()));
+    storePrice.Set("formattedBasePrice", winrt::to_string(price.FormattedBasePrice()));
+    storePrice.Set("formattedPrice", winrt::to_string(price.FormattedPrice()));
     storePrice.Set("currencyCode", winrt::to_string(price.CurrencyCode()));
     storeProd.Set("price", storePrice);
     storeProd.Set("storeId", winrt::to_string(current.Key()));
