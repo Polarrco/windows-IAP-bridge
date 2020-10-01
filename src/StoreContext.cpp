@@ -2,6 +2,7 @@
 #include "GetCustomerPurchaseIdAsyncWorker.h"
 #include "GetStoreProductsAsyncWorker.h"
 #include "RequestPurchaseAsyncWorker.h"
+#include "RequestRateAndReviewAppAsyncWorker.h"
 #include "GetAppLicenseAsyncWorker.h"
 #include <Windows.h>
 #include <iostream>
@@ -23,6 +24,7 @@ Napi::Object StoreContext::Init(Napi::Env env, Napi::Object exports) {
                       InstanceMethod("getCustomerPurchaseIdAsync", &StoreContext::GetCustomerPurchaseIdAsync),
                       InstanceMethod("requestPurchaseAsync", &StoreContext::RequestPurchaseAsync),
                       InstanceMethod("getAppLicenseAsync", &StoreContext::GetAppLicenseAsync),
+                      InstanceMethod("requestRateAndReviewAppAsync", &StoreContext::RequestRateAndReviewAppAsync),
                   });
 
   constructor = Napi::Persistent(func);
@@ -52,7 +54,7 @@ Napi::Value StoreContext::Initialize(const Napi::CallbackInfo &info) {
   Napi::HandleScope scope(env);
   Napi::Buffer<char *> bufferData = info[0].As<Napi::Buffer<char *>>();
   uint32_t handle = *reinterpret_cast<uint32_t *>(bufferData.Data());
-  HWND hwnd = (HWND)handle;
+  HWND hwnd = (HWND)handle; // todo: conversion from 'uint32_t' to 'HWND' of greater size
   bool result = this->m_impl->Initialize(hwnd);
   return Napi::Boolean::New(info.Env(), result);
 }
@@ -94,6 +96,18 @@ void StoreContext::RequestPurchaseAsync(const Napi::CallbackInfo &info) {
       winrt::to_hstring(purchaseProperties.Utf8Value()));
   Napi::Function cb = info[2].As<Napi::Function>();
   (new RequestPurchaseAsyncWorker(cb, storeId, storePurchaseProperties, GetInternalInstance()))->Queue();
+}
+
+void StoreContext::RequestRateAndReviewAppAsync(const Napi::CallbackInfo &info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  if (info.Length() < 1) {
+    Napi::TypeError::New(env, "Too few arguments.").ThrowAsJavaScriptException();
+  }
+
+  Napi::Function cb = info[0].As<Napi::Function>();
+  (new RequestRateAndReviewAppAsyncWorker(cb, GetInternalInstance()))->Queue();
 }
 
 void StoreContext::GetAppLicenseAsync(const Napi::CallbackInfo &info) {

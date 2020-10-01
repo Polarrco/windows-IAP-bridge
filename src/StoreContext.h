@@ -16,6 +16,7 @@ private:
   void GetCustomerPurchaseIdAsync(const Napi::CallbackInfo &info);
   void RequestPurchaseAsync(const Napi::CallbackInfo &info);
   void GetAppLicenseAsync(const Napi::CallbackInfo &info);
+  void RequestRateAndReviewAppAsync(const Napi::CallbackInfo &info);
 
   Napi::Value Initialize(const Napi::CallbackInfo &info);
   WindowsStoreImpl *m_impl;

@@ -198,3 +198,20 @@ WindowsStoreImpl::RequestPurchaseAsync(std::string storeId, StorePurchasePropert
     return WindowsStoreImpl::StorePurchaseResult(result.ExtendedError(), NULL);
   }
 }
+
+WindowsStoreImpl::StoreRateAndReviewResult
+WindowsStoreImpl::RequestRateAndReviewAppAsync() {
+  StoreContext context = StoreContext::GetDefault();
+  auto initWindow = context.try_as<IInitializeWithWindow>();
+  if (initWindow != nullptr) {
+    HRESULT hr = initWindow->Initialize(m_hwnd);
+  }
+
+  auto result = context.RequestRateAndReviewAppAsync().get();
+
+  if (result.ExtendedError() == S_OK) {
+    return WindowsStoreImpl::StoreRateAndReviewResult(NULL, static_cast<int>(result.Status()));
+  } else {
+    return WindowsStoreImpl::StoreRateAndReviewResult(result.ExtendedError(), NULL);
+  }
+}

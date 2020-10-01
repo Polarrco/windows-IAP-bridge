@@ -10,7 +10,8 @@
             "src/RequestPurchaseAsyncWorker.cpp",
             "src/GetStoreProductsAsyncWorker.cpp",
             "src/GetCustomerPurchaseIdAsyncWorker.cpp",
-            "src/GetAppLicenseAsyncWorker.cpp"
+            "src/GetAppLicenseAsyncWorker.cpp",
+            "src/RequestRateAndReviewAppAsyncWorker.cpp",
         ],
         'include_dirs': [
             '<!@(node -p "require(\'node-addon-api\').include")'

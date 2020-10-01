@@ -26,6 +26,12 @@ public:
     StoreProduct(std::string inAppPurchaseToken) : in_app_purchase_token(inAppPurchaseToken) {}
   };
 
+  struct StoreRateAndReviewResult {
+    int extended_error;
+    int status;
+    StoreRateAndReviewResult(int extendedError, int stat) : extended_error(extendedError), status(stat) {}
+  };
+
 public:
   WindowsStoreImpl();
   ~WindowsStoreImpl();
@@ -42,9 +48,13 @@ public:
   std::string GetCustomerPurchaseId(std::string token, std::string id);
   winrt::Windows::Foundation::IAsyncAction GetCustomerPurchaseIdAsync(std::string token, std::string id);
   StorePurchaseResult RequestPurchaseAsync(std::string storeId);
+
   StorePurchaseResult
   RequestPurchaseAsync(std::string storeId,
                        winrt::Windows::Services::Store::StorePurchaseProperties &purchaseProperties);
+
+  StoreRateAndReviewResult
+  RequestRateAndReviewAppAsync();
 
 private:
   bool GetIsMicrosoftAccrued(AttributionScope scope);
