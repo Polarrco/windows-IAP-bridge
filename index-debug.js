@@ -11,5 +11,10 @@ function getAppLocalStorageFolder() {
     console.log(store.getAppLocalStorageFolder())
 }
 
+function requestRateAndReviewApp() {
+    store.requestRateAndReviewApp(console.log.bind(this))
+}
+
 getAppLocalStorageFolder()
 getAssociatedStoreProducts()
+requestRateAndReviewApp()

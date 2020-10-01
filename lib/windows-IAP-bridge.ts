@@ -8,6 +8,13 @@ declare module "polarr_windows_store" {
         serverError,
     }
 
+    export enum StoreRateAndReviewStatus {
+        succeeded,
+        canceledByUser,
+        networkError,
+        Error,
+    }
+
     export class StoreProduct {
         inAppOfferToken: String;
         price: StorePrice;
@@ -47,6 +54,14 @@ declare module "polarr_windows_store" {
 
     }
 
+    export class StoreRateAndReviewResult  {
+        extendedError: Number;
+        ExtendedJsonData: String;
+        status: StoreRateAndReviewStatus;
+        wasUpdated: Boolean;
+        constructor();
+    }
+
     export class StoreContext {
         user: Object;
         constructor();
@@ -64,6 +79,7 @@ declare module "polarr_windows_store" {
         requestPurchaseAsync(storeId: String, callback: (error: Error, result: StorePurchaseResult) => void): void;
         requestPurchaseAsync(storeId: String, storePurchaseProperties: StorePurchaseProperties, callback: (error: Error, result: StorePurchaseResult) => void): void;
 
+        requestRateAndReviewAppAsync(callback: (error: Error, result: StoreRateAndReviewResult) => void): void;
     }
 
     export class StoreAppLicense {
