@@ -15,6 +15,7 @@ private:
   void GetAssociatedStoreProductsAsync(const Napi::CallbackInfo &info);
   void GetCustomerPurchaseIdAsync(const Napi::CallbackInfo &info);
   void RequestPurchaseAsync(const Napi::CallbackInfo &info);
+  void ReportConsumableFulfillmentAsync(const Napi::CallbackInfo &info);
   void GetAppLicenseAsync(const Napi::CallbackInfo &info);
 
   Napi::Value Initialize(const Napi::CallbackInfo &info);

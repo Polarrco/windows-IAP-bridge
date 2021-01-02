@@ -198,3 +198,20 @@ WindowsStoreImpl::RequestPurchaseAsync(std::string storeId, StorePurchasePropert
     return WindowsStoreImpl::StorePurchaseResult(result.ExtendedError(), NULL);
   }
 }
+
+WindowsStoreImpl::StoreConsumableStatus
+WindowsStoreImpl::ReportConsumableFulfillmentAsync(std::string addOnStoreId, int quantity, winrt::guid trackingId) {
+  StoreContext context = StoreContext::GetDefault();
+  auto initWindow = context.try_as<IInitializeWithWindow>();
+  if (initWindow != nullptr) {
+    HRESULT hr = initWindow->Initialize(m_hwnd);
+  }
+
+  auto result = context.ReportConsumableFulfillmentAsync(to_hstring(addOnStoreId), quantity, trackingId).get();
+
+  if (result.ExtendedError() == S_OK) {
+    return WindowsStoreImpl::StoreConsumableStatus(NULL, static_cast<int>(result.Status()));
+  } else {
+    return WindowsStoreImpl::StoreConsumableStatus(result.ExtendedError(), NULL);
+  }
+}

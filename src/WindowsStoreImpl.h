@@ -21,6 +21,12 @@ public:
     StorePurchaseResult(int extendedError, int stat) : extended_error(extendedError), status(stat) {}
   };
 
+  struct StoreConsumableStatus {
+    int extended_error;
+    int status;
+    StoreConsumableStatus(int extendedError, int stat) : extended_error(extendedError), status(stat) {}
+  };
+
   struct StoreProduct {
     std::string in_app_purchase_token;
     StoreProduct(std::string inAppPurchaseToken) : in_app_purchase_token(inAppPurchaseToken) {}
@@ -45,6 +51,7 @@ public:
   StorePurchaseResult
   RequestPurchaseAsync(std::string storeId,
                        winrt::Windows::Services::Store::StorePurchaseProperties &purchaseProperties);
+  StoreConsumableStatus ReportConsumableFulfillmentAsync(std::string addOnStoreId, int quantity, winrt::guid trackingId);
 
 private:
   bool GetIsMicrosoftAccrued(AttributionScope scope);
