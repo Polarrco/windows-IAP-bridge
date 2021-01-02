@@ -2,10 +2,13 @@
 #include "GetCustomerPurchaseIdAsyncWorker.h"
 #include "GetStoreProductsAsyncWorker.h"
 #include "RequestPurchaseAsyncWorker.h"
+#include "ReportConsumableFulfillmentAsyncWorker.h"
 #include "GetAppLicenseAsyncWorker.h"
 #include <Windows.h>
 #include <iostream>
 #include <string>
+#include <combaseapi.h>
+#include <objbase.h>
 
 Napi::FunctionReference StoreContext::constructor;
 
@@ -22,6 +25,7 @@ Napi::Object StoreContext::Init(Napi::Env env, Napi::Object exports) {
                       InstanceMethod("getAssociatedStoreProductsAsync", &StoreContext::GetAssociatedStoreProductsAsync),
                       InstanceMethod("getCustomerPurchaseIdAsync", &StoreContext::GetCustomerPurchaseIdAsync),
                       InstanceMethod("requestPurchaseAsync", &StoreContext::RequestPurchaseAsync),
+                      InstanceMethod("reportConsumableFulfillmentAsync", &StoreContext::ReportConsumableFulfillmentAsync),
                       InstanceMethod("getAppLicenseAsync", &StoreContext::GetAppLicenseAsync),
                   });
 
@@ -52,7 +56,7 @@ Napi::Value StoreContext::Initialize(const Napi::CallbackInfo &info) {
   Napi::HandleScope scope(env);
   Napi::Buffer<char *> bufferData = info[0].As<Napi::Buffer<char *>>();
   uint32_t handle = *reinterpret_cast<uint32_t *>(bufferData.Data());
-  HWND hwnd = (HWND)handle;
+  HWND hwnd = (HWND)(UINT_PTR)handle;
   bool result = this->m_impl->Initialize(hwnd);
   return Napi::Boolean::New(info.Env(), result);
 }
@@ -94,6 +98,21 @@ void StoreContext::RequestPurchaseAsync(const Napi::CallbackInfo &info) {
       winrt::to_hstring(purchaseProperties.Utf8Value()));
   Napi::Function cb = info[2].As<Napi::Function>();
   (new RequestPurchaseAsyncWorker(cb, storeId, storePurchaseProperties, GetInternalInstance()))->Queue();
+}
+
+void StoreContext::ReportConsumableFulfillmentAsync(const Napi::CallbackInfo &info) {
+    Napi::Env env = info.Env();
+    Napi::HandleScope scope(env);
+    if (info.Length() < 3) {
+        Napi::TypeError::New(env, "Too few arguments.").ThrowAsJavaScriptException();
+    }
+    Napi::String addOnStoreId = info[0].As<Napi::String>();
+    int quantity = napi_get_value_int32(env, info[1], 0);
+    GUID trackingGuid;
+    CoCreateGuid(&trackingGuid);
+    winrt::guid trackingId = trackingGuid;
+    Napi::Function cb = info[2].As<Napi::Function>();
+    (new ReportConsumableFulfillmentAsyncWorker(cb, addOnStoreId, quantity, trackingId, GetInternalInstance()))->Queue();
 }
 
 void StoreContext::GetAppLicenseAsync(const Napi::CallbackInfo &info) {
