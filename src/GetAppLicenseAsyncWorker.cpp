@@ -3,6 +3,7 @@
 #include <iostream>
 #include <napi.h>
 #include <string>
+#include <winrt/Windows.Foundation.Collections.h>
 
 GetAppLicenseAsyncWorker::GetAppLicenseAsyncWorker(const Napi::Function &callback, WindowsStoreImpl *pImpl)
     : Napi::AsyncWorker(callback), m_pImpl(pImpl), m_result(NULL) {}

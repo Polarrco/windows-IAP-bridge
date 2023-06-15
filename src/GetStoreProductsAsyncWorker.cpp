@@ -3,6 +3,7 @@
 #include <iostream>
 #include <napi.h>
 #include <string>
+#include <winrt/Windows.Foundation.Collections.h>
 
 GetStoreProductsAsyncWorker::GetStoreProductsAsyncWorker(const Napi::Function &callback, Napi::Array &productKinds,
                                                          WindowsStoreImpl *pImpl)
