@@ -24,7 +24,6 @@ void GetAppLicenseAsyncWorker::OnOK() {
     head.MoveNext();
   }
   obj.Set("addOnLicenses", addOnLicensesObj);
-  obj.Set("addOnLicenses", addOnLicensesObj);
   Callback().MakeCallback(Receiver().Value(), {
                                                   env.Null(), // error first callback
                                                   obj         // value sent back to the callback
