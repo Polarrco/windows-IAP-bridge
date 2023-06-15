@@ -14,8 +14,8 @@
   "author": "tauseefk",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^3.0.7",
-    "electron-rebuild": "^1.8.2"
+    "@electron/get": "^2.0.2",
+    "@electron/rebuild": "^3.2.13"
   },
   "dependencies": {
     "node-addon-api": "^1.5.0"
