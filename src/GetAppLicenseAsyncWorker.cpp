@@ -3,6 +3,7 @@
 #include <iostream>
 #include <napi.h>
 #include <string>
+#include <winrt/Windows.Foundation.Collections.h>
 
 GetAppLicenseAsyncWorker::GetAppLicenseAsyncWorker(const Napi::Function &callback, WindowsStoreImpl *pImpl)
     : Napi::AsyncWorker(callback), m_pImpl(pImpl), m_result(NULL) {}
@@ -22,6 +23,7 @@ void GetAppLicenseAsyncWorker::OnOK() {
     addOnLicensesObj.Set(winrt::to_string(current.Key()), addOnLicense);
     head.MoveNext();
   }
+  obj.Set("addOnLicenses", addOnLicensesObj);
   obj.Set("addOnLicenses", addOnLicensesObj);
   Callback().MakeCallback(Receiver().Value(), {
                                                   env.Null(), // error first callback

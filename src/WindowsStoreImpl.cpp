@@ -3,6 +3,7 @@
 #include <unknwn.h>
 #include "winrt/Windows.Data.Json.h"
 #include "winrt/Windows.Storage.h"
+#include "winrt/Windows.Foundation.Collections.h"
 #include <Windows.h>
 #include <shobjidl.h>
 #include <Shlobj.h>
